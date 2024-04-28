@@ -16,6 +16,27 @@
     padding: 15px;
     text-align: center;
 }
+.imageId{
+    color: #fff;
+    font-size: 40px;
+    font-weight: normal;
+    padding: 15px;
+    text-align: center;
+}
+.downloadImage{
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: antiquewhite;
+    font-size: large;
+    width:200px;
+    height: 60px;
+    align-items: center;
+    position: absolute;
+    left: 43%;
+    top: 85%;
+}
+
 .container .image-container{
     display: grid;
     grid-template-columns: repeat(3,1fr);
@@ -65,8 +86,8 @@
     z-index: 100;
 }
 .container .popup-image img{
-max-width:  90%;
-max-height: 90%;
+max-width:  60%;
+max-height: 60%;
 position: absolute;
 top: 50%;left: 50%;
 transform: translate(-50%,-50%);
