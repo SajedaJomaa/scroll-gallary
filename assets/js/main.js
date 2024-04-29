@@ -39,9 +39,9 @@ async function fetchData() {
             fetchData();
         }
     }, { threshold: 0.2 });
-    observer.observe(document.querySelector('.image-container'));
+    observer.observe(document.querySelector('.observed'));
 }
-
+//Download Button Implementation
 function downloadImage(url, filename) {
     fetch(url)
         .then(response => response.blob())
