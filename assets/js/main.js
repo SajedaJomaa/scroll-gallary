@@ -7,7 +7,6 @@ async function fetchData() {
     isFetching = true;
     let response = await fetch(`https://picsum.photos/v2/list?page=${currentPage}&limit=10`)
     let data = await response.json();
-
     console.log(data);
     isFetching = false;
     if (data.length === 0) {
@@ -19,8 +18,7 @@ async function fetchData() {
         let div = document.createElement('div');
         div.className = 'image';
         div.innerHTML = `<img src="${image.download_url}" alt="">`
-        document.querySelector('.imageId').innerHTML = image.id;
-
+        document.querySelector('.imageId').innerHTML = `Image ID : ${image.id}<br>  Image Auther :${image.author}`;
         root.appendChild(div);
         document.querySelectorAll('.image-container .image img').forEach(image => {
             image.onclick = () => {
@@ -28,6 +26,7 @@ async function fetchData() {
                 document.querySelector('.popup-image img').src = image.getAttribute('src');
                 let btnDownload = document.querySelector('.downloadImage');
                 btnDownload.addEventListener('click', () => {
+
                 });
 
             }
@@ -38,15 +37,25 @@ async function fetchData() {
         }
     }
     currentPage++;
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !isFetching && hasMore) {
+            fetchData();
+        }
+    }, { threshold: 0.2 });
+
+    observer.observe(document.querySelector('.image-container'));
+
 }
-window.addEventListener('scroll', () => {
-    if (isFetching || !hasMore) {
-        return
-    }
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        fetchData();
-    }
-})
+
 
 
 fetchData();
+
+
+
+
+
+
+
+
+
