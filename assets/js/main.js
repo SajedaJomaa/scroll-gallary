@@ -52,10 +52,10 @@ async function fetchData() {
 
 
 fetchData();
-function downloadImage(url) {
+function downloadImage(url, filename) {
     let a = document.createElement('a');
     a.href = url;
-    a.download = '../image';
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -63,5 +63,5 @@ function downloadImage(url) {
 
 document.querySelector('.downloadImage').addEventListener('click', function () {
     let imageUrl = document.querySelector('.popup-image img').src;
-    downloadImage(imageUrl);
+    downloadImage(imageUrl, 'image.jpg');
 });
