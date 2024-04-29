@@ -41,17 +41,24 @@ async function fetchData() {
     }, { threshold: 0.2 });
     observer.observe(document.querySelector('.image-container'));
 }
-fetchData();
+
 function downloadImage(url, filename) {
-    let a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        })
+        .catch(error => console.error('Download failed:', error));
 }
 
 document.querySelector('.downloadImage').addEventListener('click', function () {
     let imageUrl = document.querySelector('.popup-image img').src;
     downloadImage(imageUrl, 'image.jpg');
 });
+fetchData();
+
