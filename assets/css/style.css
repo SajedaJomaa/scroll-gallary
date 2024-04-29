@@ -87,6 +87,7 @@
     height: 100%;
     width: 100%;
     z-index: 100;
+    display: none;
 
 
 }
@@ -109,4 +110,5 @@ transform: translate(-50%,-50%);
 border: 5px solid #fff;
 border-radius: 5px;
 object-fit: cover;
+
 }
