@@ -24,10 +24,6 @@ async function fetchData() {
             image.onclick = () => {
                 document.querySelector('.popup-image').style.display = 'block';
                 document.querySelector('.popup-image img').src = image.getAttribute('src');
-                let btnDownload = document.querySelector('.downloadImage');
-                btnDownload.addEventListener('click', () => {
-
-                });
 
             }
         });
