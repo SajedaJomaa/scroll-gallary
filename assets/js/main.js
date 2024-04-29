@@ -43,14 +43,8 @@ async function fetchData() {
             fetchData();
         }
     }, { threshold: 0.2 });
-
     observer.observe(document.querySelector('.image-container'));
-
 }
-
-
-
-
 fetchData();
 function downloadImage(url, filename) {
     let a = document.createElement('a');
