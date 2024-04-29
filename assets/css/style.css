@@ -56,7 +56,7 @@
 @media screen and (max-width:430px) {
     
 .container .image-container{
-    grid-template-columns:auto;
+    grid-template-columns:1fr;
 }
 }
 
