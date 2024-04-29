@@ -31,6 +31,7 @@ async function fetchData() {
 
             }
         });
+
         document.querySelector('.popup-image span').onclick = () => {
             document.querySelector('.popup-image ').style.display = 'none';
 
@@ -49,13 +50,18 @@ async function fetchData() {
 
 
 
+
 fetchData();
+function downloadImage(url) {
+    let a = document.createElement('a');
+    a.href = url;
+    a.download = '../image';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
 
-
-
-
-
-
-
-
-
+document.querySelector('.downloadImage').addEventListener('click', function () {
+    let imageUrl = document.querySelector('.popup-image img').src;
+    downloadImage(imageUrl);
+});
