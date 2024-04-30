@@ -1,7 +1,7 @@
 let currentPage = 1;
 let isFetching = false;
 let hasMore = true;
-
+let lastImage;
 let root = document.getElementById('root');
 async function fetchData() {
     isFetching = true;
@@ -20,6 +20,7 @@ async function fetchData() {
         div.innerHTML = `<img src="${image.download_url}" alt="">`
         document.querySelector('.imageId').innerHTML = `Image ID : ${image.id}<br>  Image Auther :${image.author}`;
         root.appendChild(div);
+        lastImage = div.querySelector('img');
         document.querySelectorAll('.image-container .image img').forEach(image => {
             image.onclick = () => {
                 document.querySelector('.popup-image').style.display = 'block';
@@ -39,7 +40,7 @@ async function fetchData() {
             fetchData();
         }
     }, { threshold: 0.2 });
-    observer.observe(document.querySelector('.observed'));
+    observer.observe(lastImage);
 }
 
 function downloadImage(url, filename) {
