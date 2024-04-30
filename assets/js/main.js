@@ -1,8 +1,14 @@
 let currentPage = 1;
 let isFetching = false;
 let hasMore = true;
-let lastImage;
 let root = document.getElementById('root');
+let lastImage;
+const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !isFetching && hasMore) {
+        fetchData();
+    }
+}, { threshold: 0.2 });
+
 async function fetchData() {
     isFetching = true;
     let response = await fetch(`https://picsum.photos/v2/list?page=${currentPage}&limit=10`)
@@ -14,7 +20,6 @@ async function fetchData() {
         return
     }
     for (let image of data) {
-
         let div = document.createElement('div');
         div.className = 'image';
         div.innerHTML = `<img src="${image.download_url}" alt="">`
@@ -33,14 +38,10 @@ async function fetchData() {
             document.querySelector('.popup-image ').style.display = 'none';
 
         }
+        observer.observe(lastImage);
     }
     currentPage++;
-    const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && !isFetching && hasMore) {
-            fetchData();
-        }
-    }, { threshold: 0.2 });
-    observer.observe(lastImage);
+    observer.unobserve(lastImage);
 }
 
 function downloadImage(url, filename) {
@@ -61,5 +62,5 @@ document.querySelector('.downloadImage').addEventListener('click', function () {
     let imageUrl = document.querySelector('.popup-image img').src;
     downloadImage(imageUrl, 'image.jpg');
 });
-fetchData();
 
+fetchData();
