@@ -20,8 +20,7 @@ async function fetchData() {
         div.innerHTML = `<img src="${image.download_url}" alt="">`
         document.querySelector('.imageId').innerHTML = `Image ID : ${image.id}<br>  Image Auther :${image.author}`;
         root.appendChild(div);
-        imageContainer = document.querySelector('.image-container');
-        lastImage = imageContainer.lastElementChild;
+
         document.querySelectorAll('.image-container .image img').forEach(image => {
             image.onclick = () => {
                 document.querySelector('.popup-image').style.display = 'block';
@@ -35,6 +34,8 @@ async function fetchData() {
 
         }
     }
+    imageContainer = document.querySelector('.image-container');
+    lastImage = imageContainer.lastElementChild;
     currentPage++;
     const observer = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && !isFetching && hasMore) {
